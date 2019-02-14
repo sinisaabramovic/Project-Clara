@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb6a94ec11fa4c35a1dc70d26531081, type: 3}
+  m_Name: Fungi
+  m_EditorClassIdentifier: 
+  moneyCost: 2
+  name: Fungi
+  gameObject: {fileID: 0}
+  sprite: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 8a45daee134ea4bb781d0103de209598, type: 2}
