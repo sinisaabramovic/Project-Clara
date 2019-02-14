@@ -102,54 +102,6 @@ public class NPCController : PawnController
 
         base.Update();
 
-        //if(nPCModel.state == PawnState.Idle && currentNode != null)
-        //{
-        //    nPCView.disableCollider();           
-        //    graphController.StartSearch(new Vector2(transform.position.x, transform.position.z),
-        //        currentNode.toVector2(),
-        //            (List<Node> path) => {
-        //                if (path == null) return;
-        //                CallAction("Move", new PathData(path), (bool result) => {
-        //                    if (result)
-        //                    {
-        //                        nPCView.enableCollider();
-
-        //                        nPCView.DisplayOrdersInfo(true);
-
-        //                        Vector3 lookTo = new Vector3(transform.position.x, transform.position.y, transform.position.z - 1);
-
-        //                        nPCView.RotateTo(lookTo,(bool obj) => {
-        //                            nPCModel.userOrder.DisplayOrder();
-        //                            currentNode = null;
-        //                            StartCoroutine(GetComponent<Timer>().StartCountdown((bool returnVal) => {
-
-        //                                nPCView.disableCollider();
-        //                                nPCView.StopAnimation();
-        //                                if (nPCModel.served)
-        //                                {
-        //                                    nPCView.StartAnimation(PawnState.GoodOreder);
-        //                                }
-        //                                else
-        //                                {
-        //                                    nPCView.StartAnimation(PawnState.BadOrder);
-        //                                }
-
-        //                                nPCView.DisplayOrdersInfo(false);
-
-        //                                StartCoroutine(GetComponent<Timer>().StartCountdown((bool retObj) => {
-        //                                    currentNode = exitNodde;
-        //                                    nPCView.StartAnimation(PawnState.Walk);
-
-        //                                }, 3));
-
-        //                            }, CountDownTimer));
-
-        //                          });
-        //                    }
-        //                });
-        //            });
-        //}
-
         if (nPCModel.state == PawnState.Idle && currentNode != null)
         {
             nPCView.disableCollider();
