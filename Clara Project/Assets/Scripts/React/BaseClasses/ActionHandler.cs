@@ -8,17 +8,12 @@ public class ActionHandler : MonoBehaviour, IObserver<ActionModel>
 
     private Action<ActionModel> action;
     private IDisposable unsubscriber;
-    private Action action1;
 
     public ActionHandler(Action<ActionModel> action)
     {
         this.action = action;
     }
 
-    public ActionHandler(Action action1)
-    {
-        this.action1 = action1;
-    }
 
     public virtual ActionHandler addAction(Action<ActionModel> action)
     {

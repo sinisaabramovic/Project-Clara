@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ActionMove : ActionHandler
 {
-    public ActionMove(Action action) : base(action)
+    private ActionMove(Action<ActionModel> action) : base(action)
     {
         //base.SetAction(Move);
     }

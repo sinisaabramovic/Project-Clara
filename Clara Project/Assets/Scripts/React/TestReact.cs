@@ -20,34 +20,13 @@ public class TestReact : MonoBehaviour {
         move = GetComponent<ActionMove>();
         //actionHandlers = GetComponents<ActionHandler>();
 
-        move.addAction((ActionModel obj) => { Debug.Log(obj.count + "  " + obj.name); })
-            .addAction((ActionModel obj) => { Debug.Log(obj.count + "  " + obj.name); })
-            .addAction((ActionModel obj) => { Debug.Log(obj.count + "  " + obj.name); });
+        move.addAction((ActionModel obj) => { Debug.Log(obj.count + " 1 " + obj.name); })
+            .addAction((ActionModel obj) => { Debug.Log(obj.count + " 2 " + obj.name); })
+            .addAction((ActionModel obj) => { Debug.Log(obj.count + " 3 " + obj.name); });
 
+        
         move.Subscribe(provider);
-        //for (int i=0; i < actionHandlers.Length; i++)
-        //{
-        //    actionHandlers[i].Subscribe(provider);
-        //}
-        //actionHandlers[0].Subscribe(provider);
-        //provider.DoAction(() => { actionHandlers[1].Call(); });
-        //provider.DoAction(actionHandlers[1].Call);
-
-        //actionHandler.Unsubscribe();
-        //provider.EndAction();
-
-        //ActionHandler actionHandler = new ActionHandler(() => { dumpAction("1"); });
-        //actionHandler.Subscribe(provider);
-
-        //ActionHandler actionHandler2 = new ActionHandler(() => { dumpAction("2"); });
-        //actionHandler2.Subscribe(provider);
-
-        //provider.DoAction(() => { doAction("X"); });
-        //actionHandler.Unsubscribe();
-        //provider.DoAction(() => { doAction("Y"); });
-        //provider.DoAction(null);
-
-        //provider.EndAction();
+  
 
     }
 
@@ -55,7 +34,7 @@ public class TestReact : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-
+            //move.Unsubscribe();
             provider.DoNext(drek);
             provider.DoComplete(null);
         }
@@ -67,6 +46,13 @@ public class TestReact : MonoBehaviour {
         }
 
 
+    }
+
+    IEnumerator Example(float time)
+    {
+        Debug.Log("TICK CALLED!");
+        yield return new WaitForSeconds(time);
+        Debug.Log("TICK ENDED!");
     }
 
 

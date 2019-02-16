@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ActionRotate : ActionHandler
 {
-    public ActionRotate(Action action) : base(action)
+    public ActionRotate(Action<ActionModel> action) : base(action)
     {
     }
 
