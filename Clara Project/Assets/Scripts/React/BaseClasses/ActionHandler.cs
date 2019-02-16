@@ -21,8 +21,15 @@ public class ActionHandler : MonoBehaviour, IObserver<ActionModel>
         return this;
     }
 
+    public virtual ActionHandler removeAction(Action<ActionModel> action)
+    {
+        this.action -= action;
+        return this;
+    }
+
     public virtual void OnError(Exception error)
     {
+
     }
 
     public virtual void OnNext(ActionModel actionData)

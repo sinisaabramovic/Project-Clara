@@ -38,7 +38,7 @@ public class ActionHandlerManager : IObservable<ActionModel>
         }
     }
 
-    public void DoNext(ActionModel actionModel)
+    public void Execute(ActionModel actionModel)
     {
         foreach(var observer in observers)
         {
@@ -58,6 +58,8 @@ public class ActionHandlerManager : IObservable<ActionModel>
 
             observers.Clear();
         }
+
+
     }
 }
 
