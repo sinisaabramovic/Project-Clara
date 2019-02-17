@@ -11,7 +11,6 @@ public class TestReact : MonoBehaviour {
 
     ActionMove move;
     ActionModel drek = new ActionModel();
-    private delegate void someDumpAction(ActionModel action);
     // Use this for initialization
     void Start () {
 
@@ -20,7 +19,6 @@ public class TestReact : MonoBehaviour {
 
         move = GetComponent<ActionMove>();
         //actionHandlers = GetComponents<ActionHandler>();
-
         move.Add(HandleAction1).Add(HandleAction2).Add(HandleAction3);
 
         move.Remove(HandleAction2);
@@ -28,25 +26,6 @@ public class TestReact : MonoBehaviour {
         move.Subscribe(provider);
 
     }
-
-    void HandleAction3(ActionModel obj)
-    {
-        Action3();
-    }
-
-
-    void HandleAction2(ActionModel obj)
-    {
-        Action2();
-        StopAllCoroutines();
-    }
-
-
-    void HandleAction1(ActionModel obj)
-    {
-        Action1();       
-    }
-
 
     private void Update()
     {
@@ -62,8 +41,26 @@ public class TestReact : MonoBehaviour {
             provider.Execute(drek);
             provider.DoComplete();
         }
+    }
+
+    void HandleAction3(ActionModel obj)
+    {
+        Debug.Log("CALL FOR !" + obj.count);
+        Action3();
+    }
 
 
+    void HandleAction2(ActionModel obj)
+    {
+        Debug.Log("CALL FOR !" + obj.count);
+        Action2();
+        StopAllCoroutines();
+    }
+
+    void HandleAction1(ActionModel obj)
+    {
+        Debug.Log("CALL FOR !" + obj.count);
+        Action1();       
     }
 
     IEnumerator Example(float time, string someDumpText)
