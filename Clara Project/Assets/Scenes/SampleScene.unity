@@ -519,8 +519,8 @@ GameObject:
   - component: {fileID: 164151926}
   - component: {fileID: 164151925}
   - component: {fileID: 164151924}
-  - component: {fileID: 164151927}
   - component: {fileID: 164151928}
+  - component: {fileID: 164151927}
   m_Layer: 8
   m_Name: Pawn_Player HULK
   m_TagString: Untagged
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 164151923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5f3460f29d242c4af00c56e89c8596, type: 3}
+  m_Script: {fileID: 11500000, guid: f7e1ce36c88d1463fae7768517c530c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &164151928
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 164151923}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e1ce36c88d1463fae7768517c530c7, type: 3}
+  m_Script: {fileID: 11500000, guid: ab5f3460f29d242c4af00c56e89c8596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &170076733

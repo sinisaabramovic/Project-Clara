@@ -15,13 +15,13 @@ public class ActionHandler : MonoBehaviour, IObserver<ActionModel>
     }
 
 
-    public virtual ActionHandler addAction(Action<ActionModel> action)
+    public virtual ActionHandler Add(Action<ActionModel> action)
     {
         this.action += action;
         return this;
     }
 
-    public virtual ActionHandler removeAction(Action<ActionModel> action)
+    public virtual ActionHandler Remove(Action<ActionModel> action)
     {
         this.action -= action;
         return this;

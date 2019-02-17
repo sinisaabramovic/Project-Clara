@@ -21,9 +21,9 @@ public class TestReact : MonoBehaviour {
         move = GetComponent<ActionMove>();
         //actionHandlers = GetComponents<ActionHandler>();
 
-        move.addAction(HandleAction1).addAction(HandleAction2).addAction(HandleAction3);
+        move.Add(HandleAction1).Add(HandleAction2).Add(HandleAction3);
 
-        //move.removeAction(HandleAction1);
+        move.Remove(HandleAction2);
         
         move.Subscribe(provider);
 
