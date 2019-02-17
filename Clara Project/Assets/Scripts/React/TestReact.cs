@@ -7,6 +7,8 @@ using System.Linq;
 public class TestReact : MonoBehaviour {
 
     ActionHandlerManager provider = new ActionHandlerManager();
+    Dictionary<Action<ActionModel>, IEnumerator> corutines = new Dictionary<Action<ActionModel>, IEnumerator>();
+    List<IEnumerator> corutinesList = new List<IEnumerator>();
     ActionHandler[] actionHandlers;
 
     ActionMove move;
@@ -23,14 +25,29 @@ public class TestReact : MonoBehaviour {
 
         move.addAction(HandleAction1).addAction(HandleAction2).addAction(HandleAction3);
 
+        corutines.Add(HandleAction1, Example(1, ""));
+        corutines.Add(HandleAction2, Example(1, ""));
+        corutines.Add(HandleAction3, Example(1, ""));
+
         //move.removeAction(HandleAction1);
-        
+
+        removeAction(HandleAction1);
+
         move.Subscribe(provider);
+
+    }
+
+    void removeAction(Action<ActionModel> action)
+    {
+        StopCoroutine(corutines[action]);
+        StopCoroutine(corutinesList[0]);
+        move.removeAction(action);
 
     }
 
     void HandleAction3(ActionModel obj)
     {
+        Debug.Log("ACTION 1: " + obj.count + " " + obj.name);
         Action3();
     }
 
@@ -38,7 +55,6 @@ public class TestReact : MonoBehaviour {
     void HandleAction2(ActionModel obj)
     {
         Action2();
-        StopAllCoroutines();
     }
 
 
@@ -47,24 +63,6 @@ public class TestReact : MonoBehaviour {
         Action1();       
     }
 
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            //move.Unsubscribe();
-            provider.Execute(drek);
-            provider.DoComplete(null);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            provider.Execute(drek);
-            provider.DoComplete();
-        }
-
-
-    }
 
     IEnumerator Example(float time, string someDumpText)
     {
@@ -76,7 +74,7 @@ public class TestReact : MonoBehaviour {
     private void Action1()
     {
         Debug.Log("Action 1");
-        StartCoroutine(Example(1,"1"));
+        StartCoroutine(Example(1, "1"));
     }
 
     private void Action2()
@@ -91,5 +89,21 @@ public class TestReact : MonoBehaviour {
         StartCoroutine(Example(4, "3"));
     }
 
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            provider.Execute(drek);
+            provider.DoComplete(null);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            provider.Execute(drek);
+            provider.DoComplete();
+        }
+
+
+    }
 
 }
