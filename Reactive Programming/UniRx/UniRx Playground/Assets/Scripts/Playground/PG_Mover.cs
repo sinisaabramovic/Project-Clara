@@ -5,6 +5,16 @@ using UniRx;
 using UniRx.Triggers;
 using System;
 
+public enum Directions
+{
+    Up,
+    Down,
+    South,
+    North,
+    Top,
+    Neutral
+}
+
 public class PG_Mover : MonoBehaviour {
 
     // Use this for initialization
@@ -22,6 +32,8 @@ public class PG_Mover : MonoBehaviour {
     public float speed = 0.01f;
 
     bool input = true;
+    private Directions directions = Directions.Neutral;
+    //public bool canExecute = false;
 
     void Start () {
         //ConformDoubleTap();
@@ -31,12 +43,27 @@ public class PG_Mover : MonoBehaviour {
 
     private void Update()
     {
-        if(input == true)
+
+        //if (directions == Directions.Neutral)
+        //{
+        //    baseObject.transform.localEulerAngles = setBaseObjectRotationNeutral();
+        //}
+
+        if (input == true)
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 input = false;
-                StartCoroutine(moveUp());
+                StartCoroutine(moveUp(() => {
+                    if (directions == Directions.Up)
+                    {
+                        baseObject.transform.localEulerAngles = setBaseObjectRotationUp();
+                        Debug.Log("SETS!");
+                    }else if(directions == Directions.Neutral)
+                    {
+                        baseObject.transform.localEulerAngles = setBaseObjectRotationNeutral();
+                    }
+                }));
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
@@ -56,44 +83,8 @@ public class PG_Mover : MonoBehaviour {
         }
     }
 
-    //IEnumerator RoutineA()
-    //{
-    //    Debug.Log("CALLED!");
-    //    yield return new WaitForSeconds(1);
-    //    MoveMe();
-    //}
-
-    //private void ConformDoubleTap()
-    //{
-    //    var clickStream = Observable
-    //        .EveryUpdate()
-    //        .Where(_ => Input.GetMouseButtonDown(0));
-
-    //    clickStream
-    //        .Buffer(clickStream.Throttle(TimeSpan.FromMilliseconds(250)))
-    //        .Where(xs => xs.Count >= 2)
-    //        .Subscribe(xs => MoveInTime());
-    //}
-
-    //void MoveInTime()
-    //{
-    //     var cancel = Observable.FromCoroutine(RoutineA)
-    //        .SelectMany(RoutineA)
-    //        .Subscribe();
-
-    //    cancel.Dispose();
-    //}
-
-    //private void MoveMe()
-    //{
-    //    Debug.Log("MOVE");
-    //    this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);
-    //}
-
-    IEnumerator moveUp()
-    {
-
-
+    IEnumerator moveUp(Action onComplete)
+    {    
         for (int i = 0; i < 90 / step; i++)
         {
             mover.transform.RotateAround(up.transform.position, Vector3.right, step);
@@ -101,6 +92,9 @@ public class PG_Mover : MonoBehaviour {
         }
 
         baseObject.transform.position = mover.transform.position;
+
+        onComplete();
+
         input = true;
     }
 
@@ -138,5 +132,36 @@ public class PG_Mover : MonoBehaviour {
 
         baseObject.transform.position = mover.transform.position;
         input = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if(other.gameObject.name == "South")
+        {
+            Debug.Log("TRIGGER ENTER!");
+            Debug.Log(other.gameObject.name);
+            directions = Directions.Up;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "South")
+        {
+            Debug.Log("TRIGGER EXIT!");
+            Debug.Log(other.gameObject.name);
+            directions = Directions.Neutral;
+        }
+    }
+
+    private Vector3 setBaseObjectRotationUp()
+    {
+        return new Vector3(-90, 0, 0);
+    }
+
+    private Vector3 setBaseObjectRotationNeutral()
+    {
+        return new Vector3(0, 0, 0);
     }
 }
