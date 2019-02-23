@@ -44,11 +44,6 @@ public class PG_Mover : MonoBehaviour {
     private void Update()
     {
 
-        //if (directions == Directions.Neutral)
-        //{
-        //    baseObject.transform.localEulerAngles = setBaseObjectRotationNeutral();
-        //}
-
         if (input == true)
         {
             if (Input.GetKey(KeyCode.UpArrow))
