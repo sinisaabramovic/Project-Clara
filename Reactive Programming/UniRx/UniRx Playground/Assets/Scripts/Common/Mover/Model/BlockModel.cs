@@ -27,6 +27,7 @@ public class BlockModel : MonoBehaviour
 
     public BlockModel(GameObject parent, int step, float speed)
     {
+
         this.ParentObject = parent;
         this.step = step;
         this.speed = speed;
@@ -38,6 +39,7 @@ public class BlockModel : MonoBehaviour
 
     private void Init()
     {
+
         up = new GameObject();
         down = new GameObject();
         left = new GameObject();
@@ -67,6 +69,7 @@ public class BlockModel : MonoBehaviour
 
     private void ResetRotationPoints()
     {
+
         if (point == null) return;
 
         point.Clear();
@@ -79,12 +82,14 @@ public class BlockModel : MonoBehaviour
 
     public void ResetPivotPoint()
     {
+
         this.CenterPivot.transform.position = this.ParentObject.transform.position;
         ResetRotationPoints();
     }
 
     public void Rotate(Vector3 byVector)
     {
+
         ParentObject.transform.RotateAround(this.point[byVector], byVector, this.Step);
     }
 }
