@@ -105,26 +105,31 @@ public class BlockModel : MonoBehaviour
 
     public void RotateBaseNorth()
     {
+
         CenterPivot.transform.localEulerAngles = new Vector3(90, 0, 0);
     }
 
     public void RotateBaseSouth()
     {
+
         CenterPivot.transform.localEulerAngles = new Vector3(-90, 0, 0);
     }
 
     public void RotateBaseEast()
     {
+
         CenterPivot.transform.localEulerAngles = new Vector3(0, 0, -90);
     }
 
     public void RotateBaseWest()
     {
+
         CenterPivot.transform.localEulerAngles = new Vector3(0, 0, 90);
     }
 
     public void RotateBaseDefault()
     {
+
         CenterPivot.transform.localEulerAngles = new Vector3(0, 0, 0);
     }
 }

@@ -70,12 +70,13 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
 
     private void EnableInput()
     {
-
+        //StartCoroutine(_view.Move(Vector3.right, null));
         this._view.EnableInput();
     }
 
     private void SetupInput()
     {
+
         this._view.EnableInput();
 
         // Rx Setup, subscribe on Update
@@ -90,6 +91,7 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
 
     private void SetupTriggers()
     {
+
         Trigger = (UniRx.IObservable<bool>)this.OnTriggerEnterAsObservable()
             .Where(component => component.GetComponent<BuildingBlockSide>() != null)
             .Select(component => {
@@ -99,7 +101,6 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
 
 
         Trigger.Subscribe(triggerEnter => { }).AddTo(this);
-
     }
 
 }
