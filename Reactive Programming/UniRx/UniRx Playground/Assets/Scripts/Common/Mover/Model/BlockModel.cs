@@ -67,6 +67,11 @@ public class BlockModel : MonoBehaviour
         ResetRotationPoints();
     }
 
+    public Vector3 getPosition()
+    {
+        return this.gameObject.transform.position;
+    }
+
     private void ResetRotationPoints()
     {
 

@@ -98,4 +98,9 @@ public class BlockView : MonoBehaviour, IBlockView {
                 break;
         }
     }
+
+    public Vector3 getPosition()
+    {
+        return this.gameObject.transform.position;
+    }
 }

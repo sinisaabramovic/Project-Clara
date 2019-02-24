@@ -11,6 +11,7 @@ public interface IBlockView
     void DisableInput();
     bool isInputEnabled();
     void RotateBase(DDirections dDirections);
+    Vector3 getPosition();
 }
 
 

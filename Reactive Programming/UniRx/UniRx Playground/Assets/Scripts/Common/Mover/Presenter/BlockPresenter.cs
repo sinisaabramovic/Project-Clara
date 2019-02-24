@@ -29,28 +29,28 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
         {
 
             _view.DisableInput();
-            StartCoroutine(_view.Move(Vector3.right, EnableInput));
+            StartCoroutine(_view.Move(Vector3.right, ()=> { HandleOnMove(Vector3.right); }));
 
         }
         else if (Input.GetKey(KeyCode.DownArrow))
         {
 
             _view.DisableInput();
-            StartCoroutine(_view.Move(Vector3.left, EnableInput));
+            StartCoroutine(_view.Move(Vector3.left, () => { HandleOnMove(Vector3.left); }));
 
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
 
             _view.DisableInput();
-            StartCoroutine(_view.Move(Vector3.forward, EnableInput));
+            StartCoroutine(_view.Move(Vector3.forward, () => { HandleOnMove(Vector3.forward); }));
 
         }
         else if (Input.GetKey(KeyCode.RightArrow))
         {
 
             _view.DisableInput();
-            StartCoroutine(_view.Move(Vector3.back, EnableInput));
+            StartCoroutine(_view.Move(Vector3.back, () => { HandleOnMove(Vector3.back); }));
 
         }
     }
@@ -66,12 +66,6 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
 
     public void UnInitialize()
     {
-    }
-
-    private void EnableInput()
-    {
-        //StartCoroutine(_view.Move(Vector3.right, null));
-        this._view.EnableInput();
     }
 
     private void SetupInput()
@@ -103,4 +97,25 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
         Trigger.Subscribe(triggerEnter => { }).AddTo(this);
     }
 
+    #region private methods
+    private void HandleOnMove(Vector3 moverDirections)
+    {
+        //StartCoroutine(_view.Move(Vector3.right, null));
+        this._view.EnableInput();
+        Seeker(moverDirections);
+    }
+
+    // TODO - treba vidjeti kako napraviti seeker koji ce pretrazivati sljedeci blok
+    private void Seeker(Vector3 moverDirections)
+    {
+
+        GameObject[] blocks;
+        blocks = GameObject.FindGameObjectsWithTag("Block");
+        Vector3 nextPosition = _view.getPosition();
+        nextPosition += moverDirections;
+
+        Debug.Log(_view.getPosition());
+        Debug.Log(nextPosition);
+    }
+    #endregion
 }
