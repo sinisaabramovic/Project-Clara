@@ -7,6 +7,7 @@ public interface IBlockPresenter
     void Initialize(IBlockView view);
     void UnInitialize();
     void HandleInput();
+    void HandleBaseRotation(DDirections dDirections);
 }
 
 

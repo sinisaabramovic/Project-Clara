@@ -10,6 +10,7 @@ public interface IBlockView
     void EnableInput();
     void DisableInput();
     bool isInputEnabled();
+    void RotateBase(DDirections dDirections);
 }
 
 

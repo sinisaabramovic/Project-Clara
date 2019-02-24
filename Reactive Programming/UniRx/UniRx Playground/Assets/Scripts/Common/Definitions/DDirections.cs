@@ -8,6 +8,8 @@ public enum DDirections
     Down,
     South,
     North,
+    East,
+    West,
     Top,
     Neutral
 }

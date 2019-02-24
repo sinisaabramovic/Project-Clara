@@ -65,4 +65,37 @@ public class BlockView : MonoBehaviour, IBlockView {
         }
     }
 
+    public void RotateBase(DDirections dDirections)
+    {
+        switch (dDirections)
+        {
+            case DDirections.Up:
+                _model.RotateBaseUp();
+                break;
+
+            case DDirections.Down:
+                _model.RotateBaseDown();
+                break;
+
+            case DDirections.East:
+                _model.RotateBaseEast();
+                break;
+
+            case DDirections.West:
+                _model.RotateBaseWest();
+                break;
+
+            case DDirections.South:
+                _model.RotateBaseSouth();
+                break;
+
+            case DDirections.North:
+                _model.RotateBaseNorth();
+                break;
+
+            default:
+                _model.RotateBaseDefault();
+                break;
+        }
+    }
 }

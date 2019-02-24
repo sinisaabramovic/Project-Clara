@@ -10,8 +10,15 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
 {
     private IBlockView _view;
     private IObservable<bool> _movement;
+    private IObservable<bool> _trigger;
 
-    public IObservable<bool> Movement { get { return _movement; } set { _movement = value; } }
+    public IObservable<bool> Movement { get { return _movement; } private set { _movement = value; } }
+    public IObservable<bool> Trigger { get { return _trigger; } private set { _trigger = value; } }
+
+    public void HandleBaseRotation(DDirections dDirections)
+    {
+        this._view.RotateBase(dDirections);
+    }
 
     public void HandleInput()
     {
@@ -52,6 +59,23 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
     {
 
         this._view = view;
+
+        SetupInput();
+        SetupTriggers();
+    }
+
+    public void UnInitialize()
+    {
+    }
+
+    private void EnableInput()
+    {
+
+        this._view.EnableInput();
+    }
+
+    private void SetupInput()
+    {
         this._view.EnableInput();
 
         // Rx Setup, subscribe on Update
@@ -64,14 +88,18 @@ public class BlockPresenter : MonoBehaviour, IBlockPresenter
         Movement.Subscribe(inputMovement => { }).AddTo(this);
     }
 
-    public void UnInitialize()
+    private void SetupTriggers()
     {
-    }
+        Trigger = (UniRx.IObservable<bool>)this.OnTriggerEnterAsObservable()
+            .Where(component => component.GetComponent<BuildingBlockSide>() != null)
+            .Select(component => {
+                HandleBaseRotation(component.GetComponent<BuildingBlockSide>().sideDirection);
+                return true;
+            });
 
-    private void EnableInput()
-    {
 
-        this._view.EnableInput();
+        Trigger.Subscribe(triggerEnter => { }).AddTo(this);
+
     }
 
 }
