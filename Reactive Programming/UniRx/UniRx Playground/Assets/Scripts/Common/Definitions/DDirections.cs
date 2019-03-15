@@ -11,5 +11,6 @@ public enum DDirections
     East,
     West,
     Top,
-    Neutral
+    Neutral,
+    Floor
 }
